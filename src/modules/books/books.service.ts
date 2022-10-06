@@ -8,23 +8,23 @@ import { UpdateBookDto } from './dto/update-book.dto';
 export class BooksService {
   private readonly books: BookModel[] = [];
 
-  create(data: CreateBookDto): BookModel {
+  async create(data: CreateBookDto): Promise<BookModel> {
     const book: BookModel = {
       id: randomUUID(),
       ...data,
     };
     this.books.push(book);
-    return book;
+    return await book;
   }
 
-  read(id: string): BookModel {
+  async read(id: string): Promise<BookModel> {
     const idx: number = this.books.findIndex(
       (book: BookModel) => book.id === id,
     );
-    return this.books[idx];
+    return await this.books[idx];
   }
 
-  update(data: UpdateBookDto): BookModel {
+  async update(data: UpdateBookDto): Promise<BookModel> {
     const idx: number = this.books.findIndex(
       (book: BookModel) => book.id === data.id,
     );
@@ -32,13 +32,14 @@ export class BooksService {
       ...data,
       ...this.books[idx],
     };
-    return this.books[idx];
+    return await this.books[idx];
   }
 
-  delete(id: string): void {
+  delete(id: string): string {
     const idx: number = this.books.findIndex(
       (book: BookModel) => book.id === id,
     );
     this.books.splice(idx, 1);
+    return 'true';
   }
 }
