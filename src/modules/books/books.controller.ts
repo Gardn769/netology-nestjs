@@ -17,22 +17,22 @@ export class BooksController {
   constructor(private booksService: BooksService) {}
 
   @Post()
-  create(@Body() data: CreateBookDto): BookModel {
-    return this.booksService.create(data);
+  async create(@Body() data: CreateBookDto): Promise<BookModel> {
+    return await this.booksService.create(data);
   }
 
   @Get(':id')
-  read(@Param('id') id: string): BookModel {
-    return this.booksService.read(id);
+  async read(@Param('id') id: string): Promise<BookModel> {
+    return await this.booksService.read(id);
   }
 
   @Patch()
-  update(@Body() data: UpdateBookDto): BookModel {
-    return this.booksService.update(data);
+  async update(@Body() data: UpdateBookDto): Promise<BookModel> {
+    return await this.booksService.update(data);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string): void {
-    this.booksService.delete(id);
+  async delete(@Param('id') id: string): Promise<string> {
+    return await this.booksService.delete(id);
   }
 }
