@@ -1,6 +1,5 @@
 import { Book, BookDocument } from './../../schemas/book.schema';
 import { Injectable } from '@nestjs/common';
-import { BookModel } from '../../models/book.model';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -15,15 +14,15 @@ export class BooksService {
     return book.save();
   }
 
-  async read(id: string): Promise<Book> {
+  async read(id: string): Promise<Book | null> {
     return await this.bookModel.findById(id).exec();
   }
 
-  async update(data: UpdateBookDto): Promise<Book> {
+  async update(id: string, data: UpdateBookDto): Promise<Book | null> {
     return await this.bookModel.findByIdAndUpdate(id, data);
   }
 
-  async delete(id: string): string {
+  async delete(id: string): Promise<string> {
     await this.bookModel.findByIdAndDelete(id);
     return 'true';
   }
