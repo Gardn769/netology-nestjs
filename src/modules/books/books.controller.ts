@@ -17,7 +17,7 @@ export class BooksController {
   constructor(private booksService: BooksService) {}
 
   @Post()
-  async create(@Body() data: CreateBookDto): Promise<Book | null> {
+  async create(@Body() data: CreateBookDto): Promise<Book> {
     return await this.booksService.create(data);
   }
 
@@ -26,7 +26,7 @@ export class BooksController {
     return await this.booksService.read(id);
   }
 
-  @Patch()
+  @Patch(':id')
   async update(
     @Param('id') id: string,
     @Body() data: UpdateBookDto,
@@ -35,7 +35,7 @@ export class BooksController {
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<string> {
+  async delete(@Param('id') id: string): Promise<Book | null> {
     return await this.booksService.delete(id);
   }
 }
