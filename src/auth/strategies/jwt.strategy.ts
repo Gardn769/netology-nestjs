@@ -22,10 +22,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   public async validate(payload: JwtPayload): Promise<User> {
+    console.log('gg');
+
     const user: User | null = await this.userModel.findById(payload.id).exec();
     if (!user) {
       throw new UnauthorizedException();
     }
+    console.log('validate');
+    console.log(user);
     return user;
   }
 }

@@ -10,12 +10,12 @@ import { User } from '../schemas/user.schema';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post()
+  @Post('signup')
   async signup(@Body() data: SignupDto): Promise<Partial<User>> {
     return await this.authService.signup(data);
   }
 
-  @Post()
+  @Post('signin')
   async signin(@Body() data: SigninDto): Promise<Partial<User>> {
     return await this.authService.signin(data);
   }
