@@ -12,7 +12,7 @@ import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 
-@Controller()
+@Controller('books')
 export class BooksController {
   constructor(private booksService: BooksService) {}
 
