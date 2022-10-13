@@ -23,7 +23,7 @@ export class CommentService {
     await this.commentModel.findByIdAndUpdate(id, data);
   }
 
-  async remove(id: string): Promise<void> {
+  async delete(id: string): Promise<void> {
     await this.commentModel.findByIdAndDelete(id);
   }
 
